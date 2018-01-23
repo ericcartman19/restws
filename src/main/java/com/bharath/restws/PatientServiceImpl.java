@@ -66,5 +66,20 @@ public class PatientServiceImpl implements PatientService {
 		}
 		return response;
 	}
+
+	@Override
+	public Response deletePatien(Long id) {
+		
+		Patient currentPatient = patients.get(id);
+		
+		Response response;
+		if(Objects.nonNull(currentPatient)) {
+			patients.remove(id);
+			response = Response.ok().build();	// no es obligatorio enciar el objeto serializable
+		}else {
+			response = Response.notModified().build();
+		}
+		return response;
+	}
 	
 }
