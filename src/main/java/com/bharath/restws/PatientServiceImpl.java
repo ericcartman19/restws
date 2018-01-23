@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.ws.rs.core.Response;
 
@@ -49,6 +50,21 @@ public class PatientServiceImpl implements PatientService {
 		patient.setId(++currentId);
 		patients.put(patient.getId(), patient);
 		return Response.ok(patient).build();	// devuelve un codigo 200 = OK
+	}
+
+	@Override
+	public Response updatePatien(Patient patient) {
+		
+		Patient currentPatient = patients.get(patient.getId());
+		
+		Response response;
+		if(Objects.nonNull(currentPatient)) {
+			patients.put(patient.getId(), patient);
+			response = Response.ok().build();	// no es obligatorio enciar el objeto serializable
+		}else {
+			response = Response.notModified().build();
+		}
+		return response;
 	}
 	
 }
