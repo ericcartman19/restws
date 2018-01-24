@@ -44,7 +44,7 @@ public class PatientServiceImpl implements PatientService {
 	@Override
 	public Patient getPatient(Long id) {
 		if(Objects.isNull(patients.get(id))) {
-			throw new WebApplicationException(Response.Status.NOT_FOUND);
+			throw new WebApplicationException(Response.Status.FORBIDDEN);
 		}
 		return patients.get(id);
 	}
