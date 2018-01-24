@@ -33,9 +33,9 @@ public interface PatientService {
 	
 	@Path("/patients")
 	@PUT
-	Response updatePatien(Patient patient);
+	Response updatePatient(Patient patient);
 	
 	@Path("/patients/{id}")
 	@DELETE
-	Response deletePatien(@PathParam("id") Long id);
+	Response deletePatient(@PathParam("id") Long id);
 }

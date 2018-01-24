@@ -12,6 +12,7 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.stereotype.Service;
 
+import com.bharath.restws.exceptions.PatientBusinessException;
 import com.bharath.restws.model.Patient;
 
 @Service	// con esta annotation garantizamos que Spring va a tener en cuenta este bean at runtime
@@ -57,7 +58,7 @@ public class PatientServiceImpl implements PatientService {
 	}
 
 	@Override
-	public Response updatePatien(Patient patient) {
+	public Response updatePatient(Patient patient) {
 		
 		Patient currentPatient = patients.get(patient.getId());
 		
@@ -66,13 +67,14 @@ public class PatientServiceImpl implements PatientService {
 			patients.put(patient.getId(), patient);
 			response = Response.ok().build();	// no es obligatorio enciar el objeto serializable
 		}else {
-			response = Response.notModified().build();
+			// response = Response.notModified().build();
+			throw new PatientBusinessException();
 		}
 		return response;
 	}
 
 	@Override
-	public Response deletePatien(Long id) {
+	public Response deletePatient(Long id) {
 		
 		Patient currentPatient = patients.get(id);
 		
@@ -81,7 +83,7 @@ public class PatientServiceImpl implements PatientService {
 			patients.remove(id);
 			response = Response.ok().build();	// no es obligatorio enciar el objeto serializable
 		}else {
-			response = Response.notModified().build();
+			 response = Response.notModified().build();	
 		}
 		return response;
 	}
