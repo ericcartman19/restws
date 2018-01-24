@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
 import org.springframework.stereotype.Service;
@@ -42,6 +43,9 @@ public class PatientServiceImpl implements PatientService {
 
 	@Override
 	public Patient getPatient(Long id) {
+		if(Objects.isNull(patients.get(id))) {
+			throw new WebApplicationException(Response.Status.NOT_FOUND);
+		}
 		return patients.get(id);
 	}
 
